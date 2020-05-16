@@ -62,10 +62,11 @@ end
   end
   
   def self.new_from_db(row)
-    self.new
-    row[0] = self.id
-    row[1] = self.name
-    row[2] = self.grade
+    new_student = self.new
+    new_student.id = row[0]
+    new_student.name =  row[1]
+    new_student.length = row[2]
+    new_song  
   end
 
 end
