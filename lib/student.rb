@@ -55,7 +55,7 @@ def save
   end
 end
 
-    def self.create(name, grade)
+    def self.create(name:, grade:)
     student = self.new(name, grade)
     student.save
     student
@@ -68,10 +68,16 @@ end
   end
   
   def self.find_by_name(name)
-    sql = "SELECT * FROM songs WHERE name = ?"
-    result = DB[:conn].execute(sql, name)[0]
-    Song.new(result[0], result[1], result[2])
+    sql = <<-SQL
+    SELECT * 
+    FROM students
+    WHERE name = ?
+    LIMIT 1
+    SQL
+    
+    DB[:conn].execute(sql, name).map do |row|
+      self.new_from_db(row)
+    end.first
   end
-
 
 end
