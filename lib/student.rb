@@ -39,8 +39,6 @@ def update
     DB[:conn].execute(sql, self.name, self.grade, self.id)
   end
 
-end 
-
 def save
   if self.id
     self.update
@@ -51,7 +49,8 @@ def save
     SQL
 
     DB[:conn].execute(sql, self.name, self.grade)
-    @id = DB[:conn].execute("SELECT last_insert_rowid() FROM students")[0][0]
+    @id = DB[:conn].execute("SELECT last_insert_rowid() FROM students")[0]
+  end
 end
 
   
