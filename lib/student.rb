@@ -34,7 +34,7 @@ def self.create_table
   DB[:conn].execute(sql)
 end
 
-def update 
+def update(name, grade)
     sql = <<-SQL
     UPDATE students SET name = ?, grade = ? WHERE id = ?
     SQL
