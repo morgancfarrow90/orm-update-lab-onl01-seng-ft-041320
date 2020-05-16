@@ -19,7 +19,7 @@ def self.create_table
     CREATE TABLE IF NOT EXISTS students (
       id INTEGER PRIMARY KEY,
       name TEXT,
-      grade TEXT
+      grade INTEGER
     )
     SQL
 
@@ -35,7 +35,7 @@ def self.create_table
 end
 
 def update 
-    sql = "UPDATE songs SET name = ?, grade = ? WHERE id = ?"
+    sql = "UPDATE students SET name = ?, grade = ? WHERE id = ?"
     DB[:conn].execute(sql, self.name, self.grade, self.id)
   end
 
@@ -59,6 +59,13 @@ end
     student = self.new(name, grade)
     student.save
     student
+  end
+  
+  def self.new_from_db(row)
+    self.new
+    row[0] = self.id
+    row[1] = self.name
+    row[2] = self.grade
   end
 
 end
